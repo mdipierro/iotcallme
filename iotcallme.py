@@ -40,19 +40,10 @@ class IOTWebSocketClient(WebSocketBaseClient):
         pass
 
     def closed(self, code, reason):
-        print 'error'
+        pass
 
     def received_message(self, m):
-        print 'got',m
         self.callback(m)
-
-def compute_signature(
-    method="GET",
-    url = 'https://example.com/api',
-    secret = 'api_secret'):
-    request = "%s %s" % (method, url.split('/',2)[-1])
-    signature = hmac.new(secret, request, digestmod=hashlib.sha256).digest().encode('base64')
-    return signature.strip()
 
 def call(url, payload=None, api_key=None, method=requests.post):
     headers = None
