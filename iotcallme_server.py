@@ -5,7 +5,7 @@ import uuid
 import json
 from tornado import websocket, web, ioloop
 from pymongo import MongoClient
-from iotcallme_server_master_key.py import MASTER_KEY
+from iotcallme_server_master_key import MASTER_KEY
 
 class IOTDB(object):
     def __init__(self, uri='mongodb://localhost:27017/'):
@@ -27,7 +27,7 @@ class IOTDB(object):
                 self.devices.save({'_id':device_key, 'user_id':user_id})
             return record
     def get_device(self, device_key):
-        record = self.devices.find_one({'_id':device_key}) if api_key else None
+        record = self.devices.find_one({'_id':device_key}) if device_key else None
         return record
 
 CLIENTS = {}
